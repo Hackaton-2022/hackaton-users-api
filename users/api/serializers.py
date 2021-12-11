@@ -14,9 +14,10 @@ class UserListSerializer(serializers.ModelSerializer):
             'email',
             'name',
             'last_name',
-            'document',
-            'birth',
-            'phone',
+            'age',
+            'height',
+            'weight',
+            'genre',
             'is_active',
             'is_staff',
         ]
@@ -33,10 +34,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
             'email',
             'name',
             'last_name',
-            'document',
             'password',
-            'birth',
-            'phone',
+            'age',
+            'height',
+            'weight',
+            'genre',
         ]
 
     # Hash the password when the register is created
@@ -57,9 +59,10 @@ class UserUpdateSerializer(serializers.ModelSerializer):
             'email',
             'name',
             'last_name',
-            'document',
-            'birth',
-            'phone',
+            'age',
+            'height',
+            'weight',
+            'genre',
         ]
 
 

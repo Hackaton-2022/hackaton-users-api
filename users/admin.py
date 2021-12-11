@@ -25,12 +25,13 @@ class UserCreationForm(forms.ModelForm):
         model = User
         fields = (
             'username',
+            'email',
             'name',
             'last_name',
-            'email',
-            'document',
-            'birth',
-            'phone',
+            'age',
+            'height',
+            'weight',
+            'genre',
         )
 
     def clean_password2(self):
@@ -62,9 +63,10 @@ class UserChangeForm(forms.ModelForm):
             'email',
             'name',
             'last_name',
-            'document',
-            'birth',
-            'phone',
+            'age',
+            'height',
+            'weight',
+            'genre',
             'is_staff',
         )
 
@@ -77,14 +79,14 @@ class UserAdmin(BaseUserAdmin):
 
     # The fields to be used in displaying the User model. These override the definitions on the base UserAdmin that reference specific fields on auth.User.
     list_display = (
-        'id',
         'username',
         'email',
         'name',
         'last_name',
-        'document',
-        'birth',
-        'phone',
+        'age',
+        'height',
+        'weight',
+        'genre',
         'is_staff',
         'is_active'
     )
@@ -94,7 +96,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
         ('Personal info', {
-         'fields': ('name', 'last_name', 'document', 'birth', 'phone',)
+         'fields': ('name', 'last_name', 'age', 'height', 'weight', 'genre',)
          }),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
@@ -102,7 +104,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'name', 'last_name', 'document', 'birth', 'phone', 'password1', 'password2'),
+            'fields': ('username', 'email', 'name', 'last_name', 'age', 'height', 'weight', 'genre', 'password1', 'password2'),
         }),
     )
 

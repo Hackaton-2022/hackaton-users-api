@@ -7,7 +7,7 @@ class UserManager(BaseUserManager):
     Custom user model manager.
     """
 
-    def _create_user(self, username, email, name, last_name, document, birth, phone, password, is_staff, is_superuser, **extra_fields):
+    def _create_user(self, username, email, name, last_name, age, height, weight, genre, password, is_staff, is_superuser, **extra_fields):
         """
         Create and save a User with the given data.
         """
@@ -16,9 +16,10 @@ class UserManager(BaseUserManager):
             email=email,
             name=name,
             last_name=last_name,
-            document=document,
-            birth=birth,
-            phone=phone,
+            age=age,
+            height=height,
+            weight=weight,
+            genre=genre,
             is_staff=is_staff,
             is_superuser=is_superuser,
             **extra_fields
@@ -27,17 +28,17 @@ class UserManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
-    def create_user(self, username, email, name, last_name, document, birth, phone, password=None, **extra_fields):
+    def create_user(self, username, email, name, last_name, age, height, weight, genre, password=None, **extra_fields):
         """
         Call _create_user function setting the respective parameters for a user.
         """
-        return self._create_user(username, email, name, last_name, document, birth, phone, password, False, False, **extra_fields)
+        return self._create_user(username, email, name, last_name, age, height, weight, genre, password, False, False, **extra_fields)
 
-    def create_superuser(self, username, email, name, last_name, document, birth, phone, password=None, **extra_fields):
+    def create_superuser(self, username, email, name, last_name, age, height, weight, genre, password=None, **extra_fields):
         """
         Call _create_user function setting the respective parameters for a superuser.
         """
-        return self._create_user(username, email, name, last_name, document, birth, phone, password, True, True, **extra_fields)
+        return self._create_user(username, email, name, last_name, age, height, weight, genre, password, True, True, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -59,20 +60,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         'Apellidos',
         max_length=255,
     )
-    document = models.CharField(
-        'Documento',
-        max_length=20,
-        unique=True,
+    age = models.IntegerField(
+        'Edad'
     )
-    birth = models.DateField(
-        'Fecha de nacimiento',
-        auto_now=False,
-        auto_now_add=False,
+    height = models.IntegerField(
+        'Estatura'
     )
-    phone = models.CharField(
-        'Celular',
-        max_length=15,
-        unique=True
+    weight = models.IntegerField(
+        'Peso'
+    )
+    genre = models.CharField(
+        'Genero',
+        max_length=1,
     )
 
     is_active = models.BooleanField(default=True)
@@ -88,9 +87,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         'email',
         'name',
         'last_name',
-        'document',
-        'birth',
-        'phone'
+        'age',
+        'height',
+        'weight',
+        'genre'
     ]
 
     def __str__(self):
